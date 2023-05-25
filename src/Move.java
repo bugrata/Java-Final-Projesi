@@ -13,6 +13,7 @@ public class Move {
     }
 
 
+    //Main classından çağırıldığında dizindeki txt dosyalarını taşıyan fonksiyon
     public void moveTxt() throws IOException{
 
         File file = new File(kaynak);
@@ -30,6 +31,7 @@ public class Move {
         }
     }
 
+    //Main classından çağırıldığında dizindeki pdf dosyalarını taşıyan fonksiyon
     public void movePdf() throws IOException{
 
         File file = new File(kaynak);
@@ -47,6 +49,7 @@ public class Move {
         }
     }
 
+    //Main classından çağırıldığında dizindeki docx dosyalarını taşıyan fonksiyon
     public void moveDocx() throws IOException{
 
         File file = new File(kaynak);
@@ -64,6 +67,7 @@ public class Move {
         }
     }
 
+    //Main classından çağırıldığında dizindeki tüm dosyaları taşıyan fonksiyon
     public void moveAll() throws IOException{
 
         File file = new File(kaynak);

@@ -1,3 +1,4 @@
+//Gerekli kütüphaneleri import ettik
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -44,6 +45,7 @@ public class Main extends JFrame{
          JCheckBox cbox2 = new JCheckBox("PDF Dosyaları");
          JCheckBox cbox3 = new JCheckBox("DOC Dosyaları");
          JCheckBox cbox4 = new JCheckBox("TXT Dosyaları");
+         //Eklediğimiz checkboxlarda yapılan işlemlerin kaydetmesi için eklenmiş actionlistener fonksiyonu
          cbox1.addActionListener(new ActionListener() {
               int sayac = 0;
               @Override
@@ -121,6 +123,7 @@ public class Main extends JFrame{
          panel3.setBackground(Color.LIGHT_GRAY);
          JCheckBox cbox5 = new JCheckBox("Dosyalari Sifrele");
          JCheckBox cbox6 = new JCheckBox("Dosyalari Gizle");
+         //Eklediğimiz checkboxlarda yapılan işlemlerin kaydetmesi için eklenmiş actionlistener fonksiyonu
          cbox5.addActionListener(new ActionListener() {
               int sayac = 0;
               @Override
@@ -175,6 +178,7 @@ public class Main extends JFrame{
          panel4.setBackground(Color.LIGHT_GRAY);
          JButton button3 = new JButton("Dosyalari Tasi");
          panel4.add(button3);
+         //Gerekli işlemler yapıldıktan sonra en son taşı butonuna basıldığında gerçekleşen işlemlerin olduğu actionlistener fonksiyonu
          button3.addActionListener(new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
@@ -190,7 +194,7 @@ public class Main extends JFrame{
                    EncryptDocx docSifrele = new EncryptDocx(ilkKonum);
                    EncryptTxt txtSifrele = new EncryptTxt(ilkKonum);
 
-
+                   //Yapılan seçimlerle taşıancak dosyaların şifreleme işlemlerini yapan algoritma
                    if (sifreleSecim == 1 && tasimaSecim == 1) {
                         pdfSifrele.encryptPdf();
                         docSifrele.encryptDocx();
@@ -206,7 +210,7 @@ public class Main extends JFrame{
                         txtSifrele.encryptTxt();
                    }
 
-
+                   //Yapılan seçimlerle taşıancak dosyaların gizleme işlemlerini yapan algoritma
                    if (gizleSecim == 1 && tasimaSecim == 1) {
                         try {
                              dosyaGizle.hideAll();
@@ -236,7 +240,7 @@ public class Main extends JFrame{
                         }
                    }
 
-
+                   //Yapılan seçimlerle hangi dosya türlerinin taşınacağına göre işlem yapan algoritma
                    if (tasimaSecim == 1) {
                         try {
                              dosyaTasi.moveAll();

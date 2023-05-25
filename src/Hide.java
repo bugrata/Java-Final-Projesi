@@ -14,6 +14,7 @@ public class Hide {
         this.dizinYolu = dizinYolu;
     }
 
+    //Main classından çağırıldığında dizindeki txt dosyalarını gizleyen fonksiyon
     public void hideTxt() throws IOException{
 
         File dizin = new File(dizinYolu);
@@ -35,6 +36,7 @@ public class Hide {
 
     }
 
+    //Main classından çağırıldığında dizindeki pdf dosyalarını gizleyen fonksiyon
     public void hidePdf() throws IOException{
 
         File dizin = new File(dizinYolu);
@@ -56,6 +58,7 @@ public class Hide {
 
     }
 
+    //Main classından çağırıldığında dizindeki docx dosyalarını gizleyen fonksiyon
     public void hideDocx() throws IOException{
 
         File dizin = new File(dizinYolu);
@@ -77,6 +80,7 @@ public class Hide {
 
     }
 
+    //Main classından çağırıldığında dizindeki tüm dosyaları gizleyen fonksiyon
     public void hideAll() throws IOException{
 
         File dizin = new File(dizinYolu);
