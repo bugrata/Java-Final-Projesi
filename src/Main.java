@@ -15,7 +15,7 @@ public class Main extends JFrame{
 
          //Pencere kodları
          JFrame frame = new JFrame();
-         frame.setTitle("IMU Final Project");
+         frame.setTitle("İMÜ FİNAL PROJESİ");
          frame.setLayout(new BorderLayout(10,10));
          frame.setSize(600, 300);
          frame.setResizable(false);
@@ -33,7 +33,7 @@ public class Main extends JFrame{
          //Panel 1 in kodları
          panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
          panel1.setBackground(Color.CYAN);
-         JLabel label1 = new JLabel("Dosya Sifreleme ve Tasima Uygulamasi");
+         JLabel label1 = new JLabel("Dosya Şifreleme ve Taşıma Uygulaması");
          panel1.add(label1);
 
          //Panel 2 nin kodları
@@ -41,7 +41,7 @@ public class Main extends JFrame{
          panel2.setLayout(blay1);
          panel2.setBorder(new EmptyBorder(new Insets(35, 15, 0, 15)));
          panel2.setBackground(Color.LIGHT_GRAY);
-         JCheckBox cbox1 = new JCheckBox("Tum Dosyalar");
+         JCheckBox cbox1 = new JCheckBox("Tüm Dosyalar");
          JCheckBox cbox2 = new JCheckBox("PDF Dosyaları");
          JCheckBox cbox3 = new JCheckBox("DOC Dosyaları");
          JCheckBox cbox4 = new JCheckBox("TXT Dosyaları");
@@ -52,12 +52,12 @@ public class Main extends JFrame{
               public void actionPerformed(ActionEvent e) {
                    sayac++;
                    if (sayac % 2 == 0) {
-                        System.out.println("Tum Dosyalar secimi kaldirildi");
-                        cbox1.setText("Tum Dosyalar");
+                        System.out.println("Tüm Dosyalar seçimi kaldırıldı");
+                        cbox1.setText("Tüm Dosyalar");
                    }
                    else {
-                        System.out.println("Tum Dosyalar secildi");
-                        cbox1.setText("*Tum Dosyalar*");
+                        System.out.println("Tüm Dosyalar seçildi");
+                        cbox1.setText("*Tüm Dosyalar*");
                         tasiSecim = 1;
                    }
               }
@@ -68,11 +68,11 @@ public class Main extends JFrame{
               public void actionPerformed(ActionEvent e) {
                    sayac++;
                    if (sayac % 2 == 0) {
-                        System.out.println("PDF Dosyaları secimi kaldirildi");
+                        System.out.println("PDF Dosyaları seçimi kaldırıldı");
                         cbox2.setText("PDF Dosyaları");
                    }
                    else {
-                        System.out.println("PDF Dosyaları secildi");
+                        System.out.println("PDF Dosyaları seçildi");
                         cbox2.setText("*PDF Dosyaları*");
                         tasiSecim = 2;
                    }
@@ -84,11 +84,11 @@ public class Main extends JFrame{
               public void actionPerformed(ActionEvent e) {
                    sayac++;
                    if (sayac % 2 == 0) {
-                        System.out.println("DOC Dosyaları secimi kaldirildi");
+                        System.out.println("DOC Dosyaları seçimi kaldırıldı");
                         cbox3.setText("DOC Dosyaları");
                    }
                    else {
-                        System.out.println("DOC Dosyaları secildi");
+                        System.out.println("DOC Dosyaları seçildi");
                         cbox3.setText("*DOC Dosyaları*");
                         tasiSecim = 3;
                    }
@@ -100,11 +100,11 @@ public class Main extends JFrame{
               public void actionPerformed(ActionEvent e) {
                    sayac++;
                    if (sayac % 2 == 0) {
-                        System.out.println("TXT Dosyaları secimi kaldirildi");
+                        System.out.println("TXT Dosyaları seçimi kaldırıldı");
                         cbox4.setText("TXT Dosyaları");
                    }
                    else {
-                        System.out.println("TXT Dosyaları secildi");
+                        System.out.println("TXT Dosyaları seçildi");
                         cbox4.setText("*TXT Dosyaları*");
                         tasiSecim = 4;
                    }
@@ -121,8 +121,8 @@ public class Main extends JFrame{
          panel3.setLayout(blay2);
          panel3.setBorder(new EmptyBorder(new Insets(60, 15, 0, 15)));
          panel3.setBackground(Color.LIGHT_GRAY);
-         JCheckBox cbox5 = new JCheckBox("Dosyalari Sifrele");
-         JCheckBox cbox6 = new JCheckBox("Dosyalari Gizle");
+         JCheckBox cbox5 = new JCheckBox("Dosyaları Şifrele");
+         JCheckBox cbox6 = new JCheckBox("Dosyaları Gizle");
          //Eklediğimiz checkboxlarda yapılan işlemlerin kaydetmesi için eklenmiş actionlistener fonksiyonu
          cbox5.addActionListener(new ActionListener() {
               int sayac = 0;
@@ -130,12 +130,12 @@ public class Main extends JFrame{
               public void actionPerformed(ActionEvent e) {
                    sayac++;
                    if (sayac % 2 == 0) {
-                        System.out.println("Dosyalari Sifrele secimi kaldirildi");
-                        cbox5.setText("Dosyalari Sifrele");
+                        System.out.println("Dosyaları Şifrele seçimi kaldırıldı");
+                        cbox5.setText("Dosyaları Şifrele");
                    }
                    else {
-                        System.out.println("Dosyalari Sifrele secildi");
-                        cbox5.setText("*Dosyalari Sifrele*");
+                        System.out.println("Dosyalari Şifrele seçildi");
+                        cbox5.setText("*Dosyaları Şifrele*");
                         sifreSecim = 1;
                    }
               }
@@ -146,12 +146,12 @@ public class Main extends JFrame{
               public void actionPerformed(ActionEvent e) {
                    sayac++;
                    if (sayac % 2 == 0) {
-                        System.out.println("Dosyalari Gizle secimi kaldirildi");
-                        cbox6.setText("Dosyalari Gizle");
+                        System.out.println("Dosyalari Gizle seçimi kaldırıldı");
+                        cbox6.setText("Dosyaları Gizle");
                    }
                    else {
                         System.out.println("Dosyalari Gizle secildi");
-                        cbox6.setText("*Dosyalari Gizle*");
+                        cbox6.setText("*Dosyaları Gizle*");
                         gizSecim = 1;
                    }
               }
@@ -176,13 +176,13 @@ public class Main extends JFrame{
 
          //Panel 4 ün kodları
          panel4.setBackground(Color.LIGHT_GRAY);
-         JButton button3 = new JButton("Dosyalari Tasi");
+         JButton button3 = new JButton("Dosyaları Taşı");
          panel4.add(button3);
          //Gerekli işlemler yapıldıktan sonra en son taşı butonuna basıldığında gerçekleşen işlemlerin olduğu actionlistener fonksiyonu
          button3.addActionListener(new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
-                   System.out.println("Dosyalari Tasi butonu tiklandi");
+                   System.out.println("Dosyaları Taşı butonu tıklandı");
                    String ilkKonum = tfield1.getText();
                    String sonKonum = tfield2.getText();
                    int tasimaSecim = tasiSecim;
@@ -270,7 +270,7 @@ public class Main extends JFrame{
                         }
                    }
                    else {
-                        System.out.println("Lutfen gecerli bir islem seciniz!");
+                        System.out.println("Lutfen geçerli bir işlem seçiniz!");
                    }
               }
          });
