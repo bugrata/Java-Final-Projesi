@@ -1,15 +1,25 @@
 //Gerekli kütüphaneleri import ettik
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.swing.filechooser.*;
 
 public class Main extends JFrame{
      public static int tasiSecim = 0;
      public static int gizSecim = 0;
      public static int sifreSecim = 0;
+     public static int desifreSecim = 0;
+     public static String ilkKonum;
+     public static String sonKonum;
+
 
     public static void main(String[] args) {
 
@@ -119,10 +129,11 @@ public class Main extends JFrame{
          //Panel 3 ün kodları
          BoxLayout blay2 = new BoxLayout(panel3, BoxLayout.Y_AXIS);
          panel3.setLayout(blay2);
-         panel3.setBorder(new EmptyBorder(new Insets(60, 15, 0, 15)));
+         panel3.setBorder(new EmptyBorder(new Insets(50, 15, 0, 15)));
          panel3.setBackground(Color.LIGHT_GRAY);
          JCheckBox cbox5 = new JCheckBox("Dosyaları Şifrele");
          JCheckBox cbox6 = new JCheckBox("Dosyaları Gizle");
+         JCheckBox cbox7 = new JCheckBox("Şifreyi Çöz");
          //Eklediğimiz checkboxlarda yapılan işlemlerin kaydetmesi için eklenmiş actionlistener fonksiyonu
          cbox5.addActionListener(new ActionListener() {
               int sayac = 0;
@@ -157,42 +168,88 @@ public class Main extends JFrame{
               }
          });
 
+         cbox7.addActionListener(new ActionListener() {
+              int sayac = 0;
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                   sayac++;
+                   if (sayac % 2 == 0) {
+                        System.out.println("Şifreyi Çöz seçimi kaldırıldı");
+                        cbox7.setText("Şifreyi Çöz");
+                   }
+                   else {
+                        System.out.println("Şifreyi Çöz secildi");
+                        cbox7.setText("*Şifreyi Çöz*");
+                        desifreSecim = 1;
+                   }
+              }
+         });
+
          panel3.add(cbox5);
          panel3.add(cbox6);
+         panel3.add(cbox7);
 
          //Panel 5 in kodları
          panel5.setBackground(Color.LIGHT_GRAY);
          JLabel label4 = new JLabel("Mevcut ve İletilecek Konumu Giriniz");
          JLabel label2 = new JLabel("Dosyanın konumu: ");
-         JTextField tfield1 = new JTextField(10);
+         JButton button2 = new JButton("Seçiniz");
          JLabel label3 = new JLabel("Taşınacak konum: ");
-         JTextField tfield2 = new JTextField(10);
+         JButton button3 = new JButton("Seçiniz");
 
          panel5.add(label4);
          panel5.add(label2);
-         panel5.add(tfield1);
+         panel5.add(button2);
          panel5.add(label3);
-         panel5.add(tfield2);
+         panel5.add(button3);
 
-         //Panel 4 ün kodları
-         panel4.setBackground(Color.LIGHT_GRAY);
-         JButton button3 = new JButton("Dosyaları Taşı");
-         panel4.add(button3);
-         //Gerekli işlemler yapıldıktan sonra en son taşı butonuna basıldığında gerçekleşen işlemlerin olduğu actionlistener fonksiyonu
+         button2.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                   JFileChooser fileChooser1 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                   fileChooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                   int r = fileChooser1.showOpenDialog(null);
+                   if (r == JFileChooser.APPROVE_OPTION) {
+                        ilkKonum = fileChooser1.getSelectedFile().getAbsolutePath();
+                        ilkKonum = ilkKonum + "\\";
+                        System.out.println(ilkKonum);
+                   }
+              }
+         });
+
          button3.addActionListener(new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
+                   JFileChooser fileChooser2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                   fileChooser2.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                   int r = fileChooser2.showSaveDialog(null);
+                   if (r == JFileChooser.APPROVE_OPTION) {
+                        sonKonum = fileChooser2.getSelectedFile().getAbsolutePath();
+                        sonKonum = sonKonum + "\\";
+                        System.out.println(sonKonum);
+                   }
+              }
+         });
+
+         //Panel 4 ün kodları
+         panel4.setBackground(Color.LIGHT_GRAY);
+         JButton button1 = new JButton("Dosyaları Taşı");
+         panel4.add(button1);
+         //Gerekli işlemler yapıldıktan sonra en son taşı butonuna basıldığında gerçekleşen işlemlerin olduğu actionlistener fonksiyonu
+         button1.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
                    System.out.println("Dosyaları Taşı butonu tıklandı");
-                   String ilkKonum = tfield1.getText();
-                   String sonKonum = tfield2.getText();
                    int tasimaSecim = tasiSecim;
                    int sifreleSecim = sifreSecim;
                    int gizleSecim = gizSecim;
+                   int desifreleSecim = desifreSecim;
                    Move dosyaTasi = new Move(ilkKonum, sonKonum);
                    Hide dosyaGizle = new Hide(ilkKonum);
                    EncryptPdf pdfSifrele = new EncryptPdf(ilkKonum);
                    EncryptDocx docSifrele = new EncryptDocx(ilkKonum);
                    EncryptTxt txtSifrele = new EncryptTxt(ilkKonum);
+                   Decryption txtDesifrele = new Decryption(ilkKonum);
 
                    //Yapılan seçimlerle taşıancak dosyaların şifreleme işlemlerini yapan algoritma
                    if (sifreleSecim == 1 && tasimaSecim == 1) {
@@ -208,6 +265,80 @@ public class Main extends JFrame{
                    }
                    else if (sifreleSecim == 1 && tasimaSecim == 4) {
                         txtSifrele.encryptTxt();
+                   }
+
+                   //Yapılan seçimlerle taşıancak dosyaların deşifreleme işlemlerini yapan algoritma
+                   if (desifreleSecim == 1 && tasimaSecim == 1) {
+                        try {
+                             txtDesifrele.decryptor();
+                        } catch (NoSuchAlgorithmException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (NoSuchPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (InvalidKeyException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IllegalBlockSizeException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (BadPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        }
+                        ;
+                   }
+                   else if (desifreleSecim == 1 && tasimaSecim == 2) {
+                        try {
+                             txtDesifrele.decryptor();
+                        } catch (NoSuchAlgorithmException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (NoSuchPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (InvalidKeyException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IllegalBlockSizeException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (BadPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        }
+                        ;
+                   }
+                   else if (desifreleSecim == 1 && tasimaSecim == 3) {
+                        try {
+                             txtDesifrele.decryptor();
+                        } catch (NoSuchAlgorithmException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (NoSuchPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (InvalidKeyException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IllegalBlockSizeException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (BadPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        }
+                        ;
+                   }
+                   else if (desifreleSecim == 1 && tasimaSecim == 4) {
+                        try {
+                             txtDesifrele.decryptor();
+                        } catch (NoSuchAlgorithmException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (NoSuchPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (InvalidKeyException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (IllegalBlockSizeException ex) {
+                             throw new RuntimeException(ex);
+                        } catch (BadPaddingException ex) {
+                             throw new RuntimeException(ex);
+                        }
+                        ;
                    }
 
                    //Yapılan seçimlerle taşıancak dosyaların gizleme işlemlerini yapan algoritma
